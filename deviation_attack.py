@@ -33,7 +33,6 @@ def main():
                     action="store_true")
 
 	args = parser.parse_args()
-	filename = "testDoS.csv"
 	fields = []
 	rows = []
 	field_iter = 0
@@ -48,14 +47,14 @@ def main():
 	if args.verbose:
 		print("[*] Target is %s" % args.target)
 
-	with open(filename, 'r') as csvfile:
+	with open(args.filename, 'r') as csvfile:
 		csvreader = csv.reader(csvfile)
 		# assume no header
 		for row in csvreader:
 			rows.append(row)
 		num_entries = csvreader.line_num
 		if args.verbose:
-			print("[*] Opened %s" % filename)
+			print("[*] Opened %s" % args.filename)
 
 	# column 9 is cs_icao (ICAO call sign)
 	# column 2 is latitude
