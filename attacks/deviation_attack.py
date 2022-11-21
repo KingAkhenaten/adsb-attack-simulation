@@ -48,11 +48,11 @@ def main():
 		print("[*] Target is %s" % args.target)
 
 	with open(args.filename, 'r') as csvfile:
-		csvreader = csv.reader(csvfile)
+		fd = csv.reader(csvfile)
 		# assume no header
-		for row in csvreader:
+		for row in fd:
 			rows.append(row)
-		num_entries = csvreader.line_num
+		num_entries = fd.line_num
 		if args.verbose:
 			print("[*] Opened %s" % args.filename)
 
@@ -90,5 +90,8 @@ def main():
 						abs(deviated_coords[field_iter - 1][1] - deviated_coords[0][1])))
 
 	stats(args, rows, num_entries, original_coords, deviator, deviation, displacement)
+	with open(args.filename + "_dev", 'w') as csvfile:
+		fd2 = csv.writer(csvfile)
+		fd2.writerows(rows)
 
 main()

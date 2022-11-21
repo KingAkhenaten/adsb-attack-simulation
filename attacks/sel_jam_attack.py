@@ -6,7 +6,6 @@ import csv
 import argparse
 
 def main():
-	filename = "testDoS.csv"
 	rows = []
 	field_iter = 0
 	# target = "DLH2WA"
@@ -25,15 +24,15 @@ def main():
 	if args.verbose:
 		print("[*] Target is %s" % args.target)
 
-	with open(filename, 'r') as csvfile:
-		csvreader = csv.reader(csvfile)
+	with open(args.filename, 'r') as csvfile:
+		fd = csv.reader(csvfile)
 
 		# assume no header
-		for row in csvreader:
+		for row in fd:
 			rows.append(row)
 
 	# column 9 is cs_icao (ICAO call sign)
-	for col in rows[:csvreader.line_num]:
+	for col in rows[:fd.line_num]:
 		if col[9] == args.target:
 			field_iter += 1
 			rows.remove(col)
@@ -42,10 +41,15 @@ def main():
 	field_iter = 0
 
 	# check array after removal
-	for col in rows[:csvreader.line_num]:
+	for col in rows[:fd.line_num]:
 		if col[9] == args.target:
 			field_iter += 1
 
 	if field_iter == 0:
 		print("[%s] DoS completed" % args.target)
+
+	with open(args.filename + "_jam", 'w') as csvfile:
+		fd2 = csv.writer(csvfile)
+		fd2.writerows(rows)
+
 main()
