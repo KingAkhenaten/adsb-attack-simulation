@@ -1,0 +1,7 @@
+
+
+python3 .\attacks\sel_jam_attack.py -v DAL205 .\datasets\kjfk_data.csv
+python3 utilities\SendTraffic.py -b 60 --port 49005 .\datasets\kjfk_data.csv_jam
+python3 .\utilities\udp_listen.py 49005 kjfk_data.csv
+python3 .\attacks\ghost_attack.py -v DAL4216 33.650493 -84.358113 33.649475 -84.453603 datasets\katl_ghost.csv
+python3 .\attacks\deviation_attack.py RPA4623 .\datasets\kdca_data.csv
