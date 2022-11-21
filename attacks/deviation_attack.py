@@ -40,7 +40,7 @@ def main():
 	deviated_coords = []
 	displacement = []
 	deviation = []
-	deviator = (3, 3)
+	deviator = (0, 0.03)
 
 	# target = "RYR6KG"
 
@@ -90,7 +90,7 @@ def main():
 						abs(deviated_coords[field_iter - 1][1] - deviated_coords[0][1])))
 
 	stats(args, rows, num_entries, original_coords, deviator, deviation, displacement)
-	with open(args.filename + "_dev", 'w') as csvfile:
+	with open(args.filename + "_dev", 'w', newline='') as csvfile:
 		fd2 = csv.writer(csvfile)
 		fd2.writerows(rows)
 

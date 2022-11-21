@@ -53,7 +53,7 @@ def gen_coords(args, ghost):
 		timestamp = float(ghost["timestamp"]) + 0.1
 		timestamp = round(timestamp, 1)
 		ghost["timestamp"] = str(timestamp)
-		write_csv(ghost)
+		write_csv(args, ghost)
 
 	return (track_x, track_y)
 
@@ -95,12 +95,11 @@ def gen_speed(ghost):
 	return ghost
 
 
-def write_csv(ghost):
-	filename = "testGhost.csv"
+def write_csv(args, ghost):
 	message = []
 	for key, values in ghost.items():
 		message.append(values)
-	with open(filename, 'a') as csvfile:
+	with open(args.filename, 'a', newline='') as csvfile:
 		csvwriter = csv.writer(csvfile)
 		csvwriter.writerow(message)
 
@@ -115,7 +114,7 @@ def generate_data(args):
 		"gnd": 0,
 		"track": 0,
 		"gsp": 0,
-		"cs_icao": "CJ69",		#TODO: Adjust
+		"cs_icao": args.callsign,#TODO: Adjust
 		"ac_type": "A320",		#TODO: Adjust
 		"ac_tailno": "YR-CMM",	#TODO: Adjust
 		"from_iatoa": "DUB",	#TODO: Adjust
@@ -182,7 +181,7 @@ def main():
 	rows = []
 
 	if args.verbose:
-		print("[*] Ghost callsign is %s" % args.target)
+		print("[*] Ghost callsign is %s" % args.callsign)
 	generate_data(args)
 	"""
 	with open(args.filename, 'rw') as csvfile:

@@ -48,7 +48,7 @@ def main():
 	if field_iter == 0:
 		print("[%s] DoS completed" % args.target)
 
-	with open(args.filename + "_jam", 'w') as csvfile:
+	with open(args.filename + "_jam", 'w', newline='') as csvfile:
 		fd2 = csv.writer(csvfile)
 		fd2.writerows(rows)
 
