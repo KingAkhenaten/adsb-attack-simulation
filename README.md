@@ -1,4 +1,4 @@
-# adsb-attack-simulation
+# 2023 IEEE 13th Annual Computing and Communication Workshop and Conference (CCWC) adsb-attack-simulation
 Source code for the simulation of ADS-B attacks
 
 In the python scripts, information regarding running the script can be obtained by appending "-h" to the command line parameters.
